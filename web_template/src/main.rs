@@ -105,14 +105,14 @@ async fn create_task(app_state: web::Data<AppState>, task: web::Json<Task>) -> i
     let _= db.save_to_file();
     HttpResponse::Ok().finish()
 }
-#[actix_web:main]
+#[actix_web::main]
 async fn main() ->  std::io::Result<()> {
     let db = match Database::load_from_file(){
         Ok(db) => db,
         Err(_) => Database::new()
     };
 
-    let data: web::BytesMutData<AppState> = web::Data::new(AppState {
+    let data: web::Data<AppState> = web::Data::new(AppState {
         db: Mutex::new(db)
     });
 
@@ -130,8 +130,7 @@ async fn main() ->  std::io::Result<()> {
                 .max_age(3600),
         )
         .app_data(data.clone())
-        .route("/start", web::post().to(start_game))
-        .route("/move/{id}", web::post().to(make_move))
+        .route("/start", web::post().to(create_task))
 
     })   
     .bind("127.0.0.1:8080")?
