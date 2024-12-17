@@ -15,6 +15,7 @@ use std::collections::HashMap;
 use std::fs;
 #[allow(unused_imports)] 
 use std::io::Write;
+use std::sync::MutexGuard;
 
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -94,6 +95,47 @@ impl Database {
 
 }
 
-fn main() {
-    println!("Hello, world!");
+struct AppState {
+    db: Mutex<Database>
 }
+
+async fn create_task(app_state: web::Data<AppState>, task: web::Json<Task>) -> impl Responder{
+    let mut db: MutexGuard<Database> = app_state.db.lock().unwrap();
+    db.insert(task.into_inner());
+    let _= db.save_to_file();
+    HttpResponse::Ok().finish()
+}
+#[actix_web:main]
+async fn main() ->  std::io::Result<()> {
+    let db = match Database::load_from_file(){
+        Ok(db) => db,
+        Err(_) => Database::new()
+    };
+
+    let data: web::BytesMutData<AppState> = web::Data::new(AppState {
+        db: Mutex::new(db)
+    });
+
+    HttpServer::new(move || {
+        App::new()
+        .wrap(
+            Cors::permissive()
+                .allowed_origin_fn(|origin, _req_head| {
+                    origin.as_bytes().starts_with(b"http://localhost") || origin == "null"
+                })
+                .allowed_methods(vec!["GET", "POST", "PUT", "DELETE"])
+                .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
+                .allowed_header(header::CONTENT_TYPE)
+                .supports_credentials()
+                .max_age(3600),
+        )
+        .app_data(data.clone())
+        .route("/start", web::post().to(start_game))
+        .route("/move/{id}", web::post().to(make_move))
+
+    })   
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
+
+    }
