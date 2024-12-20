@@ -19,7 +19,7 @@ pub fn get_user_response(question: &str) -> String {
 
     // Read user input
     let mut user_reponse: String = String::new();
-    stdin() 
+    stdin()
         .read_line(&mut user_reponse)
         .expect("failed to read response");
 

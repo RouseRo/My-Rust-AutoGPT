@@ -10,5 +10,6 @@
     "zenMode.hideStatusBar": false,
     "zenMode.silentNotifications": false,
     "zenMode.restore": true,
-    "notebook.lineNumbers": "on"
+    "notebook.lineNumbers": "on",
+    "editor.lineNumbers": "on"
 }
