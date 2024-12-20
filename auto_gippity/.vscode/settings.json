@@ -1,0 +1,14 @@
+{
+    "workbench.editor.defaultBinaryEditor": "default",
+    "rust-analyzer.restartServerOnConfigChange": true,
+    "window.autoDetectColorScheme": false,
+    "zenMode.hideLineNumbers": false,
+    "search.showLineNumbers": true,
+    "zenMode.centerLayout": false,
+    "zenMode.fullScreen": false,
+    "zenMode.hideActivityBar": false,
+    "zenMode.hideStatusBar": false,
+    "zenMode.silentNotifications": false,
+    "zenMode.restore": true,
+    "notebook.lineNumbers": "on"
+}
