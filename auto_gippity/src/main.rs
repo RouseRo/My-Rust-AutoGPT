@@ -3,7 +3,7 @@ mod apis;
 mod helpers;
 mod models;
 
-use helpers::commd_line::get_user_response;
+use helpers::command_line::get_user_response;
 
 fn main() {
     let usr_req: String = get_user_response("What webserver are we building today?");
