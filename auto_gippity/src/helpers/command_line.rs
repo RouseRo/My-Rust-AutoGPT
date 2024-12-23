@@ -8,7 +8,7 @@ use std::io::{stdin, stdout};
 pub enum PrintCommand {
     AICall,
     UnitTest,
-    Issue
+    Issue,
 }
 
 impl PrintCommand {
@@ -31,8 +31,8 @@ impl PrintCommand {
         println!("{}", agent_statement);
 
         // Reset color
-        stdout.execute(ResetColor).unwrap();    
-    } 
+        stdout.execute(ResetColor).unwrap();
+    }
 }
 
 // Get user request
@@ -44,7 +44,6 @@ pub fn get_user_response(question: &str) -> String {
     println!("");
     println!("{}", question);
 
-   
     // Reset Color
     stdout.execute(ResetColor).unwrap();
 
@@ -58,14 +57,15 @@ pub fn get_user_response(question: &str) -> String {
     return user_reponse.trim().to_string();
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn tests_prints_agent_msg() {
-        PrintCommand::AICall
-            .print_agent_message("Managing Agent", "Testing testing, processagent_pocessing something");
+        PrintCommand::AICall.print_agent_message(
+            "Managing Agent",
+            "Testing testing, processagent_pocessing something",
+        );
     }
 }
