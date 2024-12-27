@@ -19,7 +19,7 @@ pub const EXEC_MAIN_PATH: &str =
 
 const API_SCHEMA_PATH: &str =
     // "/Users/shaun/Code/TUTORIALS/rust_autogpt/auto_gippity/schemas/api_schema.json";
-    "/Users/rober/Source/Repos/Rust/My-Rust-AutoGPT/schemas/api_schema.json";
+    "/Users/rober/Source/Repos/Rust/My-Rust-AutoGPTeb_template/schemas/api_schema.json";
 
 // Extend ai function to encourage specific output
 pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) -> Message {
@@ -30,7 +30,9 @@ pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) -
         "FUNCTION: {}
     INSTRUCTION: You are a function printer. You ONLY print the results of functions,
     Nothing else, No commentary. Here is the input to the function: {}.
-    Print out what the function will return.",
+    IMPORTANT: DO NOT RETURN MARKDOWN AS PART OF THE RESULT.
+    IMPORTANT: DO NOT WRAP CODE WITH ``` rust OR ANY OTHER COMMENTS.
+    ONLY Print out what the function will return.",
         ai_function_str, func_input
     );
 
