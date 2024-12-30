@@ -19,7 +19,8 @@ pub const EXEC_MAIN_PATH: &str =
 
 const API_SCHEMA_PATH: &str =
     // "/Users/shaun/Code/TUTORIALS/rust_autogpt/auto_gippity/schemas/api_schema.json";
-    "/Users/rober/Source/Repos/Rust/My-Rust-AutoGPTeb_template/schemas/api_schema.json";
+    "/Users/rober/Source/Repos/Rust/My-Rust-AutoGPT/auto_gippity/schemas/api_schema.json";
+    // C:\Users\rober\Source\Repos\Rust\My-Rust-AutoGPT\auto_gippity\schemas\api_schema.json
 
 // Extend ai function to encourage specific output
 pub fn extend_ai_function(ai_func: fn(&str) -> &'static str, func_input: &str) -> Message {

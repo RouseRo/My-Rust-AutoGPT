@@ -52,6 +52,7 @@ impl ManagingAgent {
 
     fn add_agent(&mut self, agent: Box<dyn SpecialFunctions>) {
         self.agents.push(agent);
+        
     }
 
     fn create_agents(&mut self) {

@@ -342,7 +342,8 @@ mod tests {
 
         let mut factsheet: FactSheet = serde_json::from_str(factsheet_str).unwrap();
 
-        agent.attributes.state = AgentState::Discovery;
+        // agent.attributes.state = AgentState::Discovery;
+        agent.attributes.state = AgentState::UnitTesting;
         agent
             .execute(&mut factsheet)
             .await
